@@ -1,13 +1,12 @@
 import { StyledLink } from '../../utils/style/Atoms.jsx'
 import styled from 'styled-components'
-import colors from '../../utils/style/colors'
 import logo from '../../assets/dark-logo.png'
 
 const HeaderContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 100px;
+  padding: 30px;
 `
 const Image = styled.img`
   height: 70px;

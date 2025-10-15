@@ -9,11 +9,17 @@ const HomeContainer = styled.div`
   justify-content: space-around;
   flex-direction: row;
   background-color: ${colors.backgroundLight};
-  margin: 50px auto 0px auto;
-  padding: 90px 50px;
+  margin: 30px;
+  padding: 60px 90px;
 `
 const LeftCol = styled.div`
-  display: flex,
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  ${StyledLink} {
+    max-width: 250px;
+  }
 `
 
 const Title = styled.h1`
@@ -21,14 +27,11 @@ const Title = styled.h1`
   font-size: 50px;
   line-height: 161%;
   font-weight: 700;
-  margin: 70px auto 55px auto;
   color: ${colors.dark};
 `
 
 const Illustration = styled.img`
-  width: 541px;
-  height: auto;
-  margin-top: 25px;
+  flex: 1;
 `
 
 const Home = () => {
