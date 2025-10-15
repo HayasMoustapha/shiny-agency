@@ -1,5 +1,5 @@
 import Card from "../../components/Card";
-import DefaultPicture from "../../assets/default-picture.png"
+import DefaultPicture from "../../assets/profile.png"
 
 
 const freelanceProfiles = [
