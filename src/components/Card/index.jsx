@@ -1,13 +1,50 @@
-import PropTypes from "prop-types";
-import DefaultPicture from "../../assets/profile.png"
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import DefaultPicture from '../../assets/profile.png'
 
-const Card=({ label, title, picture }) =>{
+const CardLabel = styled.span`
+  color: #5843e4;
+  font-size: 22px;
+  font-weight: bold;
+`;
+
+const CardTitle = styled.span`
+  color: black;
+  font-size: 22px;
+  font-weight: normal;
+  align-self: center;
+`;
+
+const CardImage = styled.img`
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  align-self: center;
+`;
+
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: #f9f9fc;
+  border-radius: 30px;
+  width: 350px;
+  transition: 200ms;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 10px #e2e2e2;
+  }
+`;
+
+const Card = ({ label, title, picture }) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', padding: 15 }}>
-      <span>{label}</span>
-      <img src={picture} alt="freelance" height={80} width={80} />
-      <span>{title}</span>
-    </div>
+    <CardWrapper
+      style={{ display: 'flex', flexDirection: 'column', padding: 15 }}
+    >
+      <CardLabel>{label}</CardLabel>
+      <CardImage src={picture} alt="freelance" height={80} width={80} />
+      <CardTitle>{title}</CardTitle>
+    </CardWrapper>
   )
 }
 
@@ -19,9 +56,8 @@ Card.propTypes = {
 
 Card.defaultProps = {
   label: "'Freelance'",
-  title: "",
+  title: '',
   picture: DefaultPicture,
 }
-
 
 export default Card
