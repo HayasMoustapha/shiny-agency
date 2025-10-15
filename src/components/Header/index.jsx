@@ -8,7 +8,7 @@ const HeaderContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 30px 100px;
 `
 const Image = styled.img`
   height: 70px;
@@ -28,7 +28,7 @@ const StyledLink = styled(Link)`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Image src={logo} alt="" />
+      <Image src={logo} alt="Header logo" />
       <div>
         <StyledLink to="/">Accueil</StyledLink>
         <StyledLink to="/freelances">Profils</StyledLink>
