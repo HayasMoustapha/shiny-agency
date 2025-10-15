@@ -31,7 +31,7 @@ const Header = () => {
       <Image src={logo} alt="Header logo" />
       <div>
         <StyledLink to="/">Accueil</StyledLink>
-        <StyledLink to="/freelances">Profils</StyledLink>
+        <StyledLink to="/profils">Profils</StyledLink>
         <StyledLink to="/survey/1" $isFullLink>
           Faire le test
         </StyledLink>
