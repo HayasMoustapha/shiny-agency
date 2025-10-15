@@ -4,7 +4,7 @@ import colors from '../../utils/style/colors'
 import homeIllustration from '../../assets/home-illustration.svg'
 
 const HomeContainer = styled.div`
-  width: 1400px;
+  width: 1200px;
   display: flex;
   justify-content: space-around;
   flex-direction: row;

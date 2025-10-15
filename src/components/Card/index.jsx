@@ -5,19 +5,20 @@ import DefaultPicture from '../../assets/profile.png'
 const CardLabel = styled.span`
   color: #5843e4;
   font-size: 22px;
-  font-weight: bold;
-`;
+  line-height: 100%;
+  font-weight: 400;
+`
 
-const CardTitle = styled.span`
+const CardName = styled.span`
   color: black;
   font-size: 22px;
-  font-weight: normal;
+  font-weight: 400;
   align-self: center;
-`;
+`
 
 const CardImage = styled.img`
-  height: 80px;
-  width: 80px;
+  height: 148px;
+  width: 148px;
   border-radius: 50%;
   align-self: center;
 `;
@@ -25,10 +26,10 @@ const CardImage = styled.img`
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  justify-content: space-between;
+  padding: 30px;
   background-color: #f9f9fc;
   border-radius: 30px;
-  width: 350px;
   transition: 200ms;
   &:hover {
     cursor: pointer;
@@ -36,14 +37,12 @@ const CardWrapper = styled.div`
   }
 `;
 
-const Card = ({ label, title, picture }) => {
+const Card = ({ jobTitle, name, picture }) => {
   return (
-    <CardWrapper
-      style={{ display: 'flex', flexDirection: 'column', padding: 15 }}
-    >
-      <CardLabel>{label}</CardLabel>
-      <CardImage src={picture} alt="freelance" height={80} width={80} />
-      <CardTitle>{title}</CardTitle>
+    <CardWrapper>
+      <CardLabel>{jobTitle}</CardLabel>
+      <CardImage src={picture} alt="freelance" />
+      <CardName>{name}</CardName>
     </CardWrapper>
   )
 }
