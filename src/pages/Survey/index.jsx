@@ -72,19 +72,19 @@ const Survey = () => {
     fetchSurvey()
   }, [])
 
-  useEffect(() => {
-    // fetchData()
-    setDataLoading(true)
-    fetch(`http://localhost:8000/survey`).then((response) =>
-      response
-        .json()
-        .then(({ surveyData }) => {
-          setSurveyData(surveyData)
-          setDataLoading(false)
-        })
-        .catch((error) => console.log(error))
-    )
-  }, [])
+  // useEffect(() => {
+  //   // fetchData()
+  //   setDataLoading(true)
+  //   fetch(`http://localhost:8000/survey`).then((response) =>
+  //     response
+  //       .json()
+  //       .then(({ surveyData }) => {
+  //         setSurveyData(surveyData)
+  //         setDataLoading(false)
+  //       })
+  //       .catch((error) => console.log(error))
+  //   )
+  // }, [])
 
   return (
     <SurveyContainer>

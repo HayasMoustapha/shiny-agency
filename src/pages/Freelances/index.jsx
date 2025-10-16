@@ -1,32 +1,11 @@
 import styled from 'styled-components'
 import Card from '../../components/Card'
 import DefaultPicture from '../../assets/profile.png'
-
-const freelanceProfiles = [
-  {
-    name: 'Jane Doe',
-    jobTitle: 'Devops',
-    picture: DefaultPicture,
-  },
-  {
-    name: 'Alexandra Dupont',
-    jobTitle: 'Développeur frontend',
-    picture: DefaultPicture,
-  },
-  {
-    name: 'Jeanne Biche',
-    jobTitle: 'Développeur backend',
-    picture: DefaultPicture,
-  },
-  {
-    name: 'Lauren Ipsum',
-    jobTitle: 'UX Designer',
-    picture: DefaultPicture,
-  },
-]
+import { Loader } from '../../utils/style/Atoms'
+import { useState, useEffect } from 'react'
 
 const MainContainer = styled.div`
-margin-bottom: 50px;
+  margin-bottom: 50px;
 `
 
 const CardsContainer = styled.div`
@@ -49,7 +28,7 @@ const H1 = styled.h1`
   line-height: 133%;
   letter-spacing: 0%;
   font-weight: 700;
-  color: #2F2E41;
+  color: #2f2e41;
   margin-bottom: 50px;
 `
 
@@ -58,26 +37,63 @@ const H4 = styled.h4`
   line-height: 133%;
   letter-spacing: 0%;
   font-weight: 700;
-  color: #8186A0;
+  color: #8186a0;
+`
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 const Freelances = () => {
+  const [freelancersList, setFreelancersList] = useState([])
+  const [isDataLoading, setDataLoading] = useState(false)
+  const [error, setError] = useState(false)
+
+
+  useEffect(() => {
+    async function fetchfreelancersList() {
+      setDataLoading(true)
+      try {
+        const response = await fetch(`http://localhost:8000/freelances`)
+        const { freelancersList} = await response.json()
+        setFreelancersList(freelancersList)
+        setDataLoading(false)
+      } catch (error) {
+        console.log('===== error =====', error)
+        setError(true)
+      } finally {
+        setDataLoading(false)
+      }
+    }
+    fetchfreelancersList()
+  }, []);
+
+  if (error) {
+    return <span>Oups il y a eu un problème</span>
+  }
+
   return (
     <MainContainer>
       <TitleContainer>
         <H1>Trouvez votre prestataire</H1>
         <H4>Chez Shiny nous reunissons les meilleurs profils pour vous</H4>
       </TitleContainer>
-      <CardsContainer>
-        {freelanceProfiles.map((profile, index) => (
-          <Card
-            key={`${profile.name}-${index}`}
-            jobTitle={profile.jobTitle}
-            picture={profile.picture}
-            name={profile.name}
-          />
-        ))}
-      </CardsContainer>
+      {isDataLoading ? (
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      ) : (
+        <CardsContainer>
+          {freelancersList.map((profile, index) => (
+            <Card
+              key={`${profile.name}-${index}`}
+              job={profile.job}
+              picture={profile.picture}
+              name={profile.name}
+            />
+          ))}
+        </CardsContainer>
+      )}
     </MainContainer>
   )
 }
