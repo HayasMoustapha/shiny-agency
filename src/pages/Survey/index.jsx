@@ -6,6 +6,7 @@ import colors from '../../utils/style/colors'
 import { Loader } from '../../utils/style/Atoms'
 
 import { SurveyContext } from '../../utils/context'
+import { useFetch } from '../../utils/hooks'
 
 const SurveyContainer = styled.div`
   display: flex;
@@ -62,8 +63,15 @@ const Survey = () => {
   const questionNumberInt = parseInt(questionNumber)
   const prevQuestionNumber = questionNumberInt === 1 ? 1 : questionNumberInt - 1
   const nextQuestionNumber = questionNumberInt + 1
-  const [surveyData, setSurveyData] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
+
+  // Recuperation des donnees avec useFetch et useState
+  // const [surveyData, setSurveyData] = useState({})
+  // const [isDataLoading, setDataLoading] = useState(false)
+
+  // Ici on fait le call API et on recupère les données avec notre useFetch (notre hook personnalisé)
+  const { data, isLoading, error } = useFetch(`http://localhost:8000/survey`)
+
+  const { surveyData } = data
 
   const { answers, saveAnswers } = useContext(SurveyContext)
 
@@ -88,23 +96,23 @@ const Survey = () => {
     saveAnswers({ [questionNumber]: answer })
   }
 
-  useEffect(() => {
-    async function fetchSurvey() {
-      setDataLoading(true)
-      try {
-        const response = await fetch(`http://localhost:8000/survey`)
-        const { surveyData } = await response.json()
-        setSurveyData(surveyData)
-        setDataLoading(false)
-      } catch (error) {
-        console.log('===== error =====', error)
-      } finally {
-        setDataLoading(false)
-      }
-    }
-    fetchSurvey()
-  }, [])
-
+  // Ce Hook nous permet faire un call API en asynchrone et de recupérer les données
+  // useEffect(() => {
+  //   async function fetchSurvey() {
+  //     setDataLoading(true)
+  //     try {
+  //       const response = await fetch(`http://localhost:8000/survey`)
+  //       const { surveyData } = await response.json()
+  //       setSurveyData(surveyData)
+  //       setDataLoading(false)
+  //     } catch (error) {
+  //       console.log('===== error =====', error)
+  //     } finally {
+  //       setDataLoading(false)
+  //     }
+  //   }
+  //   fetchSurvey()
+  // }, [])
 
   // useEffect(() => {
   //   // fetchData()
@@ -120,13 +128,19 @@ const Survey = () => {
   //   )
   // }, [])
 
+  if (error) {
+    return <span>Il y a un problème</span>
+  }
+
   return (
     <SurveyContainer>
       <QuestionTitle>Question {questionNumber}</QuestionTitle>
-      {isDataLoading ? (
+      {isLoading ? (
         <Loader />
       ) : (
-        <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
+        <QuestionContent>
+          {surveyData && surveyData[questionNumber]}
+        </QuestionContent>
       )}
 
       <ReplyWrapper>
@@ -143,10 +157,9 @@ const Survey = () => {
           Non
         </ReplyBox>
       </ReplyWrapper>
-
       <LinkWrapper>
         <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
-        {surveyData[questionNumberInt + 1] ? (
+        {surveyData && surveyData[questionNumberInt + 1] ? (
           <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
         ) : (
           <Link to="/results">Résultats</Link>
