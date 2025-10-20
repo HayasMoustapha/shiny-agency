@@ -8,7 +8,8 @@ import Error from './components/Error';
 import Results from './pages/Results';
 import Freelances from './pages/Freelances';
 import Footer from './components/Footer';
-
+import Profile from './pages/Profile';
+import ProfileContainer from './components/ProfileContainer';
 import {ThemeProvider} from './utils/context';  
 import { SurveyProvider } from './utils/context'  
 import GlobalStyle from './utils/style/GlobalStyle';
@@ -28,6 +29,10 @@ root.render(
             <Route path="/survey/:questionNumber" element={<Survey />} />
             <Route path="/results" element={<Results />} />
             <Route path="/freelances" element={<Freelances />} />
+            <Route
+              path="/profile/:id"
+              element={<ProfileContainer />}
+            />
             <Route path="*" element={<Error />} />
           </Routes>
         </SurveyProvider>

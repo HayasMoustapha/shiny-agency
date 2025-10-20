@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import DefaultPicture from '../../assets/profile.png'
 
-const Cardjob = styled.span`
+const CardLabel = styled.span`
   color: ${({ theme }) => (theme === 'light' ? colors.primary : '#ffffff')};
   font-size: 22px;
   font-weight: normal;
@@ -46,26 +46,18 @@ const CardWrapper = styled.div`
 class Card extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isFavorite: false,
-    }
   }
 
-  setFavorite = () => {
-    this.setState({ isFavorite: !this.state.isFavorite })
-  }
 
   render() {
-    const { theme, picture, job, name } = this.props
-    const { isFavorite } = this.state
-    const star = isFavorite ? '⭐️' : ''
+    const { theme, picture, label, title } = this.props
 
     return (
       <CardWrapper theme={theme} onClick={this.setFavorite}>
-        <Cardjob theme={theme}>{job}</Cardjob>
+        <CardLabel theme={theme}>{label}</CardLabel>
         <CardImage src={picture} alt="freelance" />
         <CardTitle theme={theme}>
-          {star} {name} {star}
+           {title}
         </CardTitle>
       </CardWrapper>
     )
@@ -73,14 +65,14 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  job: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
   theme: PropTypes.string.isRequired,
 }
 
 Card.defaultProps = {
-  job: '',
+  label: '',
   title: '',
   picture: DefaultPicture,
   theme: 'light',

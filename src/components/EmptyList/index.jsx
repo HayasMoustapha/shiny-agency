@@ -9,7 +9,7 @@ const Container = styled.div`
   margin: 60px 90px;
   padding: 30px;
   background-color: ${({ theme }) =>
-        theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
+    theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
 `
 
 const Title = styled.h1`
@@ -26,15 +26,15 @@ const Illustration = styled.img`
 `
 
 function EmptyList({ theme }) {
-    return (
-        <Container theme={theme}>
-            <Title theme={theme}>Dommage...</Title>
-            <Illustration src={EmptyIllustration} />
-            <SubTitle theme={theme}>
-                Il semblerait que vous n’ayez besoin d’aucune compétence
-            </SubTitle>
-        </Container>
-    )
+  return (
+    <Container theme={theme}>
+      <Title theme={theme}>Dommage...</Title>
+      <Illustration src={EmptyIllustration} />
+      <SubTitle theme={theme}>
+        Il semblerait que vous n’ayez besoin d’aucune compétence
+      </SubTitle>
+    </Container>
+  )
 }
 
 export default EmptyList
