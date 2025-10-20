@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom'
 import { StyledLink } from '../../utils/style/Atoms.jsx'
 import styled from 'styled-components'
-import logo from '../../assets/dark-logo.png'
+import LightLogo from '../../assets/light-logo.png'
+import DarkLogo from '../../assets/dark-logo.png'
+import { useTheme } from '../../utils/hooks'
 
 const HeaderContainer = styled.nav`
   display: flex;
@@ -8,17 +11,24 @@ const HeaderContainer = styled.nav`
   align-items: center;
   padding: 30px;
 `
-const Image = styled.img`
+const HomeLogo = styled.img`
   height: 70px;
 `
 
 const Header = () => {
+  const { theme } = useTheme()
   return (
     <HeaderContainer>
-      <Image src={logo} alt="Header logo" />
+      <Link to="/">
+        <HomeLogo src={theme === 'light' ? DarkLogo : LightLogo} />
+      </Link>
       <div>
-        <StyledLink to="/">Accueil</StyledLink>
-        <StyledLink to="/freelances">Profils</StyledLink>
+        <StyledLink $theme={theme} to="/">
+          Accueil
+        </StyledLink>
+        <StyledLink $theme={theme} to="/freelances">
+          Profils
+        </StyledLink>
         <StyledLink to="/survey/1" $isFullLink>
           Faire le test
         </StyledLink>

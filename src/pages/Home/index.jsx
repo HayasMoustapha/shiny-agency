@@ -1,6 +1,7 @@
 import { StyledLink } from '../../utils/style/Atoms.jsx'
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
+import { useTheme } from '../../utils/hooks'
 import homeIllustration from '../../assets/home-illustration.svg'
 
 const HomeContainer = styled.div`
@@ -8,7 +9,8 @@ const HomeContainer = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  background-color: ${colors.backgroundLight};
+ background-color: ${({ theme }) =>
+    theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
   margin: 30px;
   padding: 60px 90px;
 `
@@ -27,7 +29,7 @@ const Title = styled.h1`
   font-size: 50px;
   line-height: 161%;
   font-weight: 700;
-  color: ${colors.dark};
+  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
 
 const Illustration = styled.img`
@@ -35,10 +37,13 @@ const Illustration = styled.img`
 `
 
 const Home = () => {
+
+  const { theme } = useTheme()
+
   return (
-    <HomeContainer>
+    <HomeContainer theme={theme}>
       <LeftCol>
-        <Title>
+        <Title theme={theme}>
           Recupérer vos besoins, on s'occupe du reste, avec les meilleurs
           talents
         </Title>

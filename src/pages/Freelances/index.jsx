@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import Card from '../../components/Card'
-import DefaultPicture from '../../assets/profile.png'
 import { Loader } from '../../utils/style/Atoms'
 import { useState, useEffect } from 'react'
+import { useFetch, useTheme } from '../../utils/hooks'
 
 const MainContainer = styled.div`
   margin-bottom: 50px;
@@ -28,7 +28,7 @@ const H1 = styled.h1`
   line-height: 133%;
   letter-spacing: 0%;
   font-weight: 700;
-  color: #2f2e41;
+   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   margin-bottom: 50px;
 `
 
@@ -37,7 +37,7 @@ const H4 = styled.h4`
   line-height: 133%;
   letter-spacing: 0%;
   font-weight: 700;
-  color: #8186a0;
+  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
 const LoaderWrapper = styled.div`
   display: flex;
@@ -45,6 +45,7 @@ const LoaderWrapper = styled.div`
 `
 
 const Freelances = () => {
+  const { theme } = useTheme()
   const [freelancersList, setFreelancersList] = useState([])
   const [isDataLoading, setDataLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -75,12 +76,12 @@ const Freelances = () => {
   return (
     <MainContainer>
       <TitleContainer>
-        <H1>Trouvez votre prestataire</H1>
-        <H4>Chez Shiny nous reunissons les meilleurs profils pour vous</H4>
+        <H1 theme={theme}>Trouvez votre prestataire</H1>
+        <H4 theme={theme}>Chez Shiny nous reunissons les meilleurs profils pour vous</H4>
       </TitleContainer>
       {isDataLoading ? (
         <LoaderWrapper>
-          <Loader />
+          <Loader theme={theme} />
         </LoaderWrapper>
       ) : (
         <CardsContainer>
