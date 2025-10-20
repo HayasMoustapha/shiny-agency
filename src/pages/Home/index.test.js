@@ -13,7 +13,9 @@ describe('Home', () => {
       </MemoryRouter>
     )
 
-    const title = screen.getByRole('heading', { name: /Recupérer vos besoins, on s'occupe du reste, avec les meilleurs talents/i })
-    expect(title).toBeInTheDocument()
+    const titleElement = screen.getByText(
+      "Recupérer vos besoins, on s'occupe du reste, avec les meilleurs talents"
+    )
+    expect(titleElement).toBeInTheDocument()
   })
 })
