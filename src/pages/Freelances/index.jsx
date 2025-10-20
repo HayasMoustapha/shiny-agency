@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Card from '../../components/Card'
 import { Loader } from '../../utils/style/Atoms'
 import { useState, useEffect } from 'react'
-import { useFetch, useTheme } from '../../utils/hooks'
+import { useTheme } from '../../utils/hooks'
 
 const MainContainer = styled.div`
   margin-bottom: 50px;
@@ -81,7 +81,7 @@ const Freelances = () => {
       </TitleContainer>
       {isDataLoading ? (
         <LoaderWrapper>
-          <Loader theme={theme} />
+          <Loader theme={theme} data-testid="loader" />
         </LoaderWrapper>
       ) : (
         <CardsContainer>
