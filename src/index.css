@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand: #5843e4;
+  --color-brand-soft: #ede9ff;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --bg: #ffffff;
+  --surface: #f7f7fb;
+  --fg: #1d1c2b;
+  --muted: #5c5b73;
+  --line: rgba(29, 28, 43, 0.1);
+}
+.dark {
+  --bg: #18171f;
+  --surface: #211f2b;
+  --fg: #f1f0f6;
+  --muted: #a39ec0;
+  --line: rgba(255, 255, 255, 0.1);
+}
+
+* { border-color: var(--line); }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.bg-bg { background: var(--bg); }
+.bg-surface { background: var(--surface); }
+.text-fg { color: var(--fg); }
+.text-muted { color: var(--muted); }
+.border-line { border-color: var(--line); }
+
+:where(a, button, input):focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
